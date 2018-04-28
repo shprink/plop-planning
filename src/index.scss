@@ -1,0 +1,173 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  --base: 1.25rem;
+  /* duration = value * 5min  */
+  --keynote: 8; // 40min
+  --pause-1: 2; // 10min
+  --pause-2: 3; // 15min
+  --lunch: 12; // 60min
+  --quicky: 3; // 15min
+  --time: 1;
+  --conf: 12; // Overridden later
+  /* Colors */
+  --pause1Color: #ffcaa9;
+  --pause2Color: #f0c0c3;
+  --lunchColor: #ffddad;
+  --keynoteColor: #91eeb5;
+  --confColor: #b2dde6;
+  --quickyColor: #a8b7de;
+  --hour1Color: #222;
+  --hour2Color: white;
+}
+
+section {
+  &.conf-30 {
+    --conf: 6; // 30min
+  }
+  &.conf-35 {
+    --conf: 7; // 35min
+  }
+  &.conf-40 {
+    --conf: 8; // 40min
+  }
+  &.conf-45 {
+    --conf: 9; // 45min
+  }
+}
+
+div {
+  min-height: var(--base);
+}
+
+section {
+  flex: 1 1 auto;
+  margin: .125rem; // counter-reset: conf;
+  counter-reset: quicky;
+  header {
+    background: whitesmoke;
+    padding: .25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    height: calc(2 * var(--base));
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    > * {
+      flex: 0 0 auto;
+      padding: .25rem;
+      border-radius: .25rem;
+      box-shadow: inset 0 0 0 .125rem hsla(0, 100%, 100%, .5);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .keynote {
+      background: var(--keynoteColor);
+      height: calc(var(--keynote) * var(--base));
+      counter-reset: time calc(var(--keynote) * 5);
+      &::before {
+        content: 'Keynote';
+        font-weight: bold;
+      }
+      &::after {
+        content: '(' counter(time) 'min)';
+        font-weight: normal;
+      }
+    }
+    .conf {
+      background: var(--confColor);
+      height: calc(var(--conf) * var(--base));
+      font-weight: bold;
+      counter-increment: conf;
+      counter-reset: time calc(var(--conf) * 5);
+      &::before {
+        content: 'Conf. #' counter(conf);
+      }
+      &::after {
+        content: '(' counter(time) 'min)';
+        font-weight: normal;
+      }
+    }
+    .quicky {
+      background: var(--quickyColor);
+      height: calc(var(--quicky) * var(--base));
+      counter-increment: quicky;
+      font-weight: bold;
+      counter-reset: time calc(var(--quicky) * 5);
+      &::before {
+        content: 'Quicky #' counter(quicky);
+      }
+      &::after {
+        content: '(' counter(time) 'min)';
+        font-weight: normal;
+      }
+    }
+    .pause-1 {
+      background: var(--pause1Color);
+      height: calc(var(--pause-1) * var(--base));
+      counter-reset: time calc(var(--pause-1) * 5);
+      &::before {
+        content: 'Pause (' counter(time) 'min)';
+      }
+    }
+    .pause-2 {
+      background: var(--pause2Color);
+      height: calc(var(--pause-2) * var(--base));
+      counter-reset: time calc(var(--pause-2) * 5);
+      &::before {
+        content: 'Pause (' counter(time) 'min)';
+      }
+    }
+    .lunch {
+      background: var(--lunchColor);
+      height: calc(var(--lunch) * var(--base));
+      counter-reset: time calc(var(--lunch) * 5);
+      &::before {
+        content: 'Lunch';
+      }
+      &::after {
+        content: '(' counter(time) 'min)';
+      }
+    }
+    .time {
+      font-family: ' Fira Code ', monospace;
+      font-size: 90%;
+      height: calc(var(--time) * var(--base));
+      box-shadow: none;
+      border-radius: 0;
+      &.even {
+        background: var(--hour1Color);
+        color: var(--hour2Color);
+      }
+      &.odd {
+        background: var(--hour2Color);
+        color: var(--hour1Color);
+      }
+    }
+  }
+  &.times {
+    flex: 0 1 auto;
+    & > header::before {
+      content: ' H . ';
+    }
+  }
+}
+
+section[class*=conf] {
+  counter-increment: test;
+  header {
+    &::before {
+      content: ' [ ' counter(test) ' ] ';
+      margin-right: .5em;
+      white-space: nowrap;
+    }
+  }
+}
