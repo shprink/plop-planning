@@ -1,0 +1,189 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  --base: 1.25rem;
+  /* duration = value * 5min  */
+  --keynote: 8;
+  --pause-1: 1;
+  --pause-2: 2;
+  --pause-3: 3;
+  --pause-4: 4;
+  --pause-6: 6;
+  --lunch-11: 11;
+  --lunch-12: 12;
+  --quicky: 3;
+  --time: 1;
+  --conf: 12;
+  /* Colors */
+  --empty: white;
+  --pause1Color: #ffcaa9;
+  --pause2Color: #f0c0c3;
+  --lunchColor: #ffddad;
+  --keynoteColor: #91eeb5;
+  --confColor: #b2dde6;
+  --quickyColor: #a8b7de;
+  --hour1Color: #222;
+  --hour2Color: white; }
+
+section.conf-30 {
+  --conf: 6; }
+
+section.conf-35 {
+  --conf: 7; }
+
+section.conf-40 {
+  --conf: 8; }
+
+section.conf-45 {
+  --conf: 9; }
+
+div {
+  min-height: var(--base); }
+
+section {
+  flex: 1 1 auto;
+  margin: .125rem;
+  counter-reset: quicky; }
+  section header {
+    background: whitesmoke;
+    padding: .25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    height: calc(2 * var(--base)); }
+  section .content {
+    display: flex;
+    flex-direction: column; }
+    section .content > * {
+      flex: 0 0 auto;
+      padding: .25rem;
+      border-radius: .25rem;
+      box-shadow: inset 0 0 0 0.125rem rgba(255, 255, 255, 0.5);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+    section .content .keynote {
+      background: var(--keynoteColor);
+      height: calc(var(--keynote) * var(--base));
+      counter-reset: time calc(var(--keynote) * 5); }
+      section .content .keynote::before {
+        content: 'Keynote';
+        font-weight: bold; }
+      section .content .keynote::after {
+        content: "(" counter(time) "min)";
+        font-weight: normal; }
+    section .content .office {
+      background: var(--keynoteColor);
+      height: calc(var(--pause-6) * var(--base));
+      counter-increment: office;
+      counter-reset: time calc(var(--pause-6) * 5); }
+      section .content .office::before {
+        content: "Office hours #" counter(office);
+        font-weight: bold; }
+      section .content .office::after {
+        content: "(" counter(time) "min)";
+        font-weight: normal; }
+    section .content .conf {
+      background: var(--confColor);
+      height: calc(var(--conf) * var(--base));
+      font-weight: bold;
+      counter-increment: conf;
+      counter-reset: time calc(var(--conf) * 5); }
+      section .content .conf::before {
+        content: "Conf. #" counter(conf); }
+      section .content .conf::after {
+        content: "(" counter(time) "min)";
+        font-weight: normal; }
+    section .content .quicky {
+      background: var(--quickyColor);
+      height: calc(var(--quicky) * var(--base));
+      counter-increment: quicky;
+      font-weight: bold;
+      counter-reset: time calc(var(--quicky) * 5); }
+      section .content .quicky::before {
+        content: "Quicky #" counter(quicky); }
+      section .content .quicky::after {
+        content: "(" counter(time) "min)";
+        font-weight: normal; }
+    section .content .empty-5 {
+      background: var(--empty);
+      height: calc(var(--pause-1) * var(--base));
+      counter-reset: time calc(var(--pause-1) * 5); }
+    section .content .empty-10 {
+      background: var(--empty);
+      height: calc(var(--pause-2) * var(--base));
+      counter-reset: time calc(var(--pause-2) * 5); }
+    section .content .pause-1 {
+      background: var(--pause2Color);
+      height: calc(var(--pause-1) * var(--base));
+      counter-reset: time calc(var(--pause-1) * 5); }
+      section .content .pause-1::before {
+        content: "Pause (" counter(time) "min)"; }
+    section .content .pause-2 {
+      background: var(--pause2Color);
+      height: calc(var(--pause-2) * var(--base));
+      counter-reset: time calc(var(--pause-2) * 5); }
+      section .content .pause-2::before {
+        content: "Pause (" counter(time) "min)"; }
+    section .content .pause-3 {
+      background: var(--pause2Color);
+      height: calc(var(--pause-3) * var(--base));
+      counter-reset: time calc(var(--pause-3) * 5); }
+      section .content .pause-3::before {
+        content: "Pause (" counter(time) "min)"; }
+    section .content .pause-4 {
+      background: var(--pause2Color);
+      height: calc(var(--pause-4) * var(--base));
+      counter-reset: time calc(var(--pause-4) * 5); }
+      section .content .pause-4::before {
+        content: "Pause (" counter(time) "min)"; }
+    section .content .pause-6 {
+      background: var(--pause2Color);
+      height: calc(var(--pause-6) * var(--base));
+      counter-reset: time calc(var(--pause-6) * 5); }
+      section .content .pause-6::before {
+        content: "Pause (" counter(time) "min)"; }
+    section .content .lunch-11 {
+      background: var(--lunchColor);
+      height: calc(var(--lunch-11) * var(--base));
+      counter-reset: time calc(var(--lunch-11) * 5); }
+      section .content .lunch-11::before {
+        content: 'Lunch'; }
+      section .content .lunch-11::after {
+        content: "(" counter(time) "min)"; }
+    section .content .lunch-12 {
+      background: var(--lunchColor);
+      height: calc(var(--lunch-12) * var(--base));
+      counter-reset: time calc(var(--lunch-12) * 5); }
+      section .content .lunch-12::before {
+        content: 'Lunch'; }
+      section .content .lunch-12::after {
+        content: "(" counter(time) "min)"; }
+    section .content .time {
+      font-family: ' Fira Code ', monospace;
+      font-size: 90%;
+      height: calc(var(--time) * var(--base));
+      box-shadow: none;
+      border-radius: 0; }
+      section .content .time.even {
+        background: var(--hour1Color);
+        color: var(--hour2Color); }
+      section .content .time.odd {
+        background: var(--hour2Color);
+        color: var(--hour1Color); }
+  section.times {
+    flex: 0 1 auto; }
+    section.times > header::before {
+      content: ' H . '; }
+
+section[class*=conf] {
+  counter-increment: test; }
+  section[class*=conf] header::before {
+    content: " [ " counter(test) " ] ";
+    margin-right: .5em;
+    white-space: nowrap; }
